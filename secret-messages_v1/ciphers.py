@@ -10,10 +10,10 @@ class Cipher:
 class Atbash(Cipher):
     def __init__(self):
         self.alphabet =  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-                                    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+                          'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
         self.cipher_alphabet = ['Z', 'Y', 'X', 'W', 'V', 'U', 'T', 'S', 'R', 'Q', 'P', 'O', 'N', 'M',
-                                         'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A']
+                                'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A']
 
 
     def encrypt(self, text):
@@ -25,9 +25,15 @@ class Atbash(Cipher):
                 index = self.alphabet.index(letter)
                 self.encrypted_text.append(self.cipher_alphabet[index])
 
+            else:
+                if letter == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
+
         self.encrypted_text = ''.join(self.encrypted_text)
         print("Here is your Encrypted message:")
         print(self.encrypted_text)
+
 
     def decrypt(self, text):
         self.decrypted_text = []
@@ -37,6 +43,11 @@ class Atbash(Cipher):
             if letter in self.cipher_alphabet:
                 index = self.cipher_alphabet.index(letter)
                 self.decrypted_text.append(self.alphabet[index])
+
+            else:
+                if letter == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
 
         self.decrypted_text = ''.join(self.decrypted_text)
         print("Here is your Decrypted message:")
@@ -48,19 +59,25 @@ class Atbash(Cipher):
 class Keyword(Cipher):
     def __init__(self):
         self.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-                        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+                         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
         self.keyword_alphabet = ['K', 'R', 'Y', 'P', 'T', 'O', 'S', 'A', 'B', 'C', 'D', 'E', 'F',
                                  'G', 'H', 'I' 'J', 'L', 'M', 'N', 'Q', 'U', 'V', 'W', 'X', 'Z']
+
 
     def encrypt(self, text):
         self.encrypted_text = []
         text = text.upper()
 
-        for thing in text:
-            if thing in self.alphabet:
-                index = self.alphabet.index(thing)
+        for letter in text:
+            if letter in self.alphabet:
+                index = self.alphabet.index(letter)
                 self.encrypted_text.append(self.keyword_alphabet[index])
+
+            else:
+                if letter == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
 
         self.encrypted_text = ''.join(self.encrypted_text)
         print("Here is your Enrypted message:")
@@ -76,6 +93,60 @@ class Keyword(Cipher):
                 index = self.keyword_alphabet.index(char)
                 self.decrypted_text.append(self.alphabet[index])
 
+            else:
+                if letter == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
+
         self.decrypted_text = ''.join(self.decrypted_text)
         print("Here is your Decrypted message:")
         print(self.decrypted_text)
+
+
+
+
+class Affine:
+    def __init__(self):
+        self.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+        self.numbers = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13',
+                       '14','15','16','17','18','19','20','21','22','23','24','25']
+
+    def encrypt(self,text):
+        self.encrypted_nums = []
+        text = text.upper()
+
+        for letter in text:
+            if letter in self.alphabet:
+                index = self.alphabet.index(letter)
+                self.encrypted_nums.append(self.numbers[index])
+
+            else:
+                if letter == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
+
+        self.encrypted_nums = '-'.join(self.encrypted_nums)
+        print("Here is your Encrypted message")
+        print(self.encrypted_nums)
+
+    def decrypt(self, nums):
+        self.decrypted_nums = []
+        nums = nums.upper()
+        nums = nums.split(" ")
+
+        for number in nums:
+            if number in self.numbers:
+                index = self.numbers.index(number)
+                self.decrypted_nums.append(self.alphabet[index])
+
+            else:
+                if number == ' ':
+                    continue
+                raise ValueError("Sorry you entered an incorrect value. This communication is now terminated")
+
+        self.decrypted_nums = ''.join(self.decrypted_nums)
+        print("Here is your Decrypted message")
+        print(self.decrypted_nums)
+
