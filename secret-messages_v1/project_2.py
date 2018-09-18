@@ -1,4 +1,5 @@
-
+import ciphers
+import sys
 
 def main_menu():
     print("Hi welcome to the Secret Message sender!")
@@ -32,7 +33,7 @@ def main_menu():
 
 
 def sub_menu(message, user_choice):
-    list_of_ciphers = ["Keyword", "Atbash", "ADFGVX"]
+    list_of_ciphers = ["Keyword", "Atbash", "Affine"]
     display_ciphers = [thing for thing in list_of_ciphers]
     while True:
 
@@ -51,8 +52,10 @@ def sub_menu(message, user_choice):
             new_user.encrypt(message)
             sys.exit("Good luck comrade!")
 
-        elif cipher_choice == 'adfgvx' and user_choice == 'encrypt':
-            break
+        elif cipher_choice == 'affine' and user_choice == 'encrypt':
+            new_user = ciphers.Affine()
+            new_user.encrypt(message)
+            sys.exit("Good luck comrade!")
 
         elif cipher_choice == 'keyword' and user_choice == 'decrypt':
             new_user = ciphers.Keyword()
@@ -64,8 +67,10 @@ def sub_menu(message, user_choice):
             new_user.decrypt(message)
             sys.exit("Good luck comrade!")
 
-        elif cipher_choice == 'adfgvx' and user_choice == 'decrypt':
-            break
+        elif cipher_choice == 'affine' and user_choice == 'decrypt':
+            new_user = ciphers.Affine()
+            new_user.decrypt(message)
+            sys.exit("Good luck comrade!")
 
         else:
             print("sorry I don't recognise that value, please try again")
@@ -77,7 +82,4 @@ def sub_menu(message, user_choice):
 
 
 main_menu()
-
-
-
 
