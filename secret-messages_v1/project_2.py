@@ -2,19 +2,30 @@ import ciphers
 import sys
 
 def main_menu():
-    print("Hi welcome to the Secret Message sender!")
-    print("You're going to be asked a few questions, please answer them to proceed")
-    print("If you would like to quit, please just press Q or type 'quit' followed by enter to exit.")
+    ''' THIS IS THE MAIN BODY.
+        IT RUNS THE INITIAL MESSAGES/INPUTS TO THE USER.'''
 
+    print("Hi welcome to the Secret Message sender! "
+          "You're going to be asked a few questions. "
+          "Please answer them to proceed.\n"
+          "If you would like to quit, "
+          "please just press Q or type 'quit' "
+          "followed by enter to exit. ")
 
     while True:
+        '''THIS WHILE LOOP IS IN PLACE TO GAIN ANSWERS FROM THE USER,
+           IT PROMPTS THE USER TO GIVE A MESSAGE,
+           ENCRYPT OR DECRYPT IT, THEN DOUBLE CHECKS IF THEY
+           ARE HAPPY WITH THEIR CHOICE.
 
+           ONCE IT HAS ALL 3 ANSWERS, IT RUNS THE SUB_MENU FUNCTION.
+        '''
 
         message = input("What is your message? ").lower()
 
-        user_choice = input("So would you like to Encrypt your message, or Decrypt? "
-                                   "Please type in the exact purpose:  ").lower()
-
+        user_choice = input("So would you like to "
+                            "Encrypt your message, or Decrypt? "
+                            "Please type in the exact purpose:  ").lower()
 
         if user_choice == "q" or user_choice == "quit":
             sys.exit("Goodbye")
@@ -23,21 +34,29 @@ def main_menu():
             print("That isnt valid, please try again")
 
         else:
-            double_check = input(f" Ok got it, you would like to {user_choice}, is that right? y/n").lower()
+            double_check = input(f" Ok got it, you would like to"
+                                 "{user_choice}, is that right? y/n").lower()
             if double_check == 'y':
+                # clear()
                 sub_menu(message, user_choice)
 
             else:
                 continue
 
 
-
 def sub_menu(message, user_choice):
+    ''' THIS IS THE SUB_MENU. IT PRESENTS THE USER WITH"
+        A LIST OF CIPHERS TO ENCRYPT OR DECRYPT THEIR CODE WITH.
+        IT RUNS A FEW CHECKS TO MAKE SURE EVERYTHING IS CORRECT,
+        THEN RUNS THE CHOSEN CIPHER. '''
+
     list_of_ciphers = ["Keyword", "Atbash", "Affine"]
     display_ciphers = [thing for thing in list_of_ciphers]
     while True:
 
-        print(f"Ok thats great, now lets move on to our next step. Please choose which Cipher you would like to use out of: {' / '.join(display_ciphers)} ")
+        print("Ok thats great, now lets move on to our next step. "
+              "Please choose which Cipher you would "
+              f"like to use out of: {' / '.join(display_ciphers)} ")
 
         cipher_choice = input("> ").lower()
 
@@ -45,7 +64,6 @@ def sub_menu(message, user_choice):
             new_user = ciphers.Keyword()
             new_user.encrypt(message)
             sys.exit("Good luck comrade!")
-
 
         elif cipher_choice == 'atbash' and user_choice == 'encrypt':
             new_user = ciphers.Atbash()
@@ -76,10 +94,4 @@ def sub_menu(message, user_choice):
             print("sorry I don't recognise that value, please try again")
             continue
 
-
-
-
-
-
 main_menu()
-
