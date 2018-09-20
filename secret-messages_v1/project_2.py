@@ -1,6 +1,15 @@
 import ciphers
 import sys
 
+
+def encrypt_again():
+    again = input("Would you like to encrypt/decrypt "
+                  "something else? y/n?  ").lower()
+    if again == 'y':
+        main_menu()
+    sys.exit("Good luck comrade!")
+
+
 def main_menu():
     ''' THIS IS THE MAIN BODY.
         IT RUNS THE INITIAL MESSAGES/INPUTS TO THE USER.'''
@@ -34,10 +43,9 @@ def main_menu():
             print("That isnt valid, please try again")
 
         else:
-            double_check = input(f" Ok got it, you would like to"
-                                 "{user_choice}, is that right? y/n").lower()
+            double_check = input("Ok got it, you would like to "
+                                 f"{user_choice}, is that right? y/n").lower()
             if double_check == 'y':
-                # clear()
                 sub_menu(message, user_choice)
 
             else:
@@ -63,32 +71,32 @@ def sub_menu(message, user_choice):
         if cipher_choice == 'keyword' and user_choice == 'encrypt':
             new_user = ciphers.Keyword()
             new_user.encrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         elif cipher_choice == 'atbash' and user_choice == 'encrypt':
             new_user = ciphers.Atbash()
             new_user.encrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         elif cipher_choice == 'affine' and user_choice == 'encrypt':
             new_user = ciphers.Affine()
             new_user.encrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         elif cipher_choice == 'keyword' and user_choice == 'decrypt':
             new_user = ciphers.Keyword()
             new_user.decrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         elif cipher_choice == 'atbash' and user_choice == 'decrypt':
             new_user = ciphers.Atbash()
             new_user.decrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         elif cipher_choice == 'affine' and user_choice == 'decrypt':
             new_user = ciphers.Affine()
             new_user.decrypt(message)
-            sys.exit("Good luck comrade!")
+            encrypt_again()
 
         else:
             print("sorry I don't recognise that value, please try again")
